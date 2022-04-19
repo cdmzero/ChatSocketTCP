@@ -1,7 +1,7 @@
 ## Introduccion 
 
 Un thread o hilo es un flujo secuencial de ejecucion de una tarea concreta. 
-Tiene especial sentido usar `hilos` a la hora de llevar a cabo tareas concurrentes(o conjuntas) siguiente un orden de acceso excluivo de manera sincronizada.
+Tiene especial sentido usar `hilos` a la hora de llevar a cabo tareas concurrentes(o conjuntas), siguiendo un orden de acceso excluivo de manera sincronizada.
 
 Para usar este componente tenemos 2 metodos principales:
 
