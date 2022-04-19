@@ -8,8 +8,8 @@ Para usar este componente tenemos 2 metodos principales:
 1. Heredar de la clase `Thread`. 
 2. Implementar la interfaz `Runnable`.
 
-### Diagrama 
-* * *
+## Diagrama 
+
 ```mermaid
     sequenceDiagram
     
@@ -33,15 +33,16 @@ Para usar este componente tenemos 2 metodos principales:
     
 ```
 
-### Sobre este proyecto
-
-1. Se trata de un servidor chat que expone el puerto 50003 para aceptar conexiones entrantes de clientes.
-
-
-### Resultado
+## Resultado
 <img width="1080" align="right" alt="result" src="https://user-images.githubusercontent.com/59641925/164057052-44387eae-0a15-4446-9754-26c5166d297c.png">
 
+&nbsp;
+&nbsp;
 
+
+## Sobre este proyecto
+
+Se trata de un servidor chat que expone el puerto 50003 para aceptar conexiones entrantes de clientes.
 
 
 #### Clase Servidor
@@ -65,43 +66,42 @@ Para usar este componente tenemos 2 metodos principales:
        }
 ```
 
-3. Los clientes se conectan a traves de la clase `socket`.
-    - Alcenamos las intancias de cliente en el vector `Usuarios`
+>1. Los clientes se conectan a traves de la clase `socket`.
+   
 ##### Clase Servidor
 ```java
 
-    // Creamos un vector (array unidimensional) para almcenar usuarios
+    // Creamos un vector (array unidimensional) para almacenar usuarios.
      public static Vector usuarios = new Vector();
 
 ```
+>  Alcemacenamos los objetos instanciados en el vector `Usuarios`
 
-4. Instanciamos un objeto de la clase `Flujo` al que le pasamos el socket de conexion del cliente `cs`
-- Ese flujo entrada/salida procesado del cliente se pasa a su ejecucion concurrente por hilo instanciando un objeto de la clase `Threat`
 
 ##### Clase Servidor
 ```java
 
-             // Aceptamos conexiones de clientes
+             // Aceptamos la conexion del cliente
                Socket cs = ss.accept();
              
                System.out.println("Conexion aceptada del Cliente: "+cs.getInetAddress());
              
-             // Declaramos el flujo de informacion a traves del socket del cliente. 
+             // Instanciamos el objeto Flujo pasando el socket del cliente. 
                Flujo flujo = new Flujo(cs);
              
-             // Declaramos el hilo de ejecucion con el flujo de informacion del cliente
+             // Instanciamos el objeto Thread pasando el objeto flujo
                Thread t = new Thread(flujo);
              
              // Procesamos el hilo
                t.start();
-}
 
 ```
+>2. Instanciamos un objeto de la clase `Flujo` al que le pasamos el socket del cliente `cs`
+> - Ese flujo se pasa su ejecucion a un hilo.
 
 
 
-5. En la clase `Flujo` que hereda de la clase `Thread` el constructor requiere un socket de cliente como parametro.
-- Guardamos el stream de entrada/salida en buffers para despues procesar esa entrada/salida y ejecutar acciones mediante hilos. 
+
 
 ##### Clase Flujo
 ```java
@@ -128,9 +128,10 @@ Para usar este componente tenemos 2 metodos principales:
 
 ```
 
-6. En la clase Flujo tenemos el motodo void Run para la ejecion por hilos de los mensajes concurrentes entre usuarios
+> 3. La clase `Flujo` que hereda de la clase `Thread` el constructor requiere de un socket de cliente como parametro.
+> - Guardamos el stream en buffers parar posteriormente procesar esa info y ejecutarla mediante hilos. 
 
-- Los clientes intercambian mensajes de manera grupal gracias al metodo `broadcast`
+
 ##### Clase Flujo
 ```java
  // Adherimos el cliente al vector de usuarios
@@ -165,10 +166,10 @@ Para usar este componente tenemos 2 metodos principales:
                  }
                  catch(IOException ioe)
                  {
-                     // Si el usuario desconecta elimina el objeto del vector usuarios
+                     // Si el usuario se desconecta; se elimina el objeto del vector usuarios
                      Servidor.usuarios.removeElement(this);
                      
-                     // Notifica el mensaje por el metodo broadcast
+                     // Notificamos a los usuarios del cambio
                      mensaje =">Usuario "+ Servidor.LogUsuarios.indexOf(this) +" se ha desconectado";
                      broadcast(mensaje);
                      
@@ -180,10 +181,11 @@ Para usar este componente tenemos 2 metodos principales:
            
     }
 ```
+>4. En la clase Flujo tenemos el motodo `void Run` herencia de la clase `Thread` para la ejecion por hilos.
+
+- Los clientes intercambian mensajes de manera grupal gracias al metodo `broadcast`
 
 
-7. En el metodo `broadcast` notificamos de los mensajes de menera grupa de manera sincronizada entre hilos.
-- Los mensajes entran de manera concurrente y sincronizada entre hilos asegurando el acceso exclusivo en el tiempo de ejecion del programa gracias al metodo `synchronized`.
 #### Clase Flujo.
 ```java
 
@@ -225,6 +227,7 @@ Para usar este componente tenemos 2 metodos principales:
              }
          }
 ```
+>5. En el metodo `broadcast` notificamos de los mensajes de menera grupa de manera sincronizada entre hilos.
+- Los mensajes entran de manera concurrente y sincronizada entre hilos asegurando el acceso exclusivo en el tiempo de ejecion del programa gracias al metodo `synchronized`.
 
-#### Capturas
 
