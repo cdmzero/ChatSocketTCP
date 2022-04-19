@@ -1,13 +1,14 @@
-#### Introduccion 
+## Introduccion 
 
-Un thread o hilo es un flujo secuencial de ejecucion de una tarea concreta. Tiene especial sentido usar varios hilos a la hora de llevar a cabo tareas concurrentes de manera sincronizada.
+Un thread o hilo es un flujo secuencial de ejecucion de una tarea concreta. 
+Tiene especial sentido usar `hilos` a la hora de llevar a cabo tareas concurrentes(o conjuntas) siguiente un orden de acceso excluivo de manera sincronizada.
 
 Para usar este componente tenemos 2 metodos principales:
 
-1. Heredar de la clase `Thread`.
+1. Heredar de la clase `Thread`. 
 2. Implementar la interfaz `Runnable`.
 
-#### Diagrama 
+### Diagrama 
 * * *
 ```mermaid
     sequenceDiagram
@@ -32,12 +33,18 @@ Para usar este componente tenemos 2 metodos principales:
     
 ```
 
-
 ### Sobre este proyecto
 
 1. Se trata de un servidor chat que expone el puerto 50003 para aceptar conexiones entrantes de clientes.
 
-##### Clase Servidor
+
+### Resultado
+<img width="1080" align="right" alt="result" src="https://user-images.githubusercontent.com/59641925/164057052-44387eae-0a15-4446-9754-26c5166d297c.png">
+
+
+
+
+#### Clase Servidor
 ```java
 
  public static void main (String args[])
@@ -220,4 +227,4 @@ Para usar este componente tenemos 2 metodos principales:
 ```
 
 #### Capturas
-![Screenshot 2022-04-14 at 21.22.05.png](inkdrop://file:nHUYFZai6)
+
