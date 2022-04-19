@@ -23,13 +23,13 @@ Para usar este componente tenemos 2 metodos principales:
         Servidor->>Servidor: Aceptando conexiones... 
     end
     Servidor->>Flujo: Flujo + Socket de cliente 1, cliente N
-    loop Procesamiento por hilo
-        Flujo->>Flujo: Gestion de mensajes concurrente por hilos... 
+    loop Gestion de mensajes por hilo
+        Flujo->>Flujo: Distribucion de manera concurrente a los clientes... 
     end
     Flujo->>Cliente: Mensaje 1
     Flujo->>ClienteN: Mensaje 1
-    Flujo->>Cliente: Mensaje 2
-    Flujo->>ClienteN: Mensaje 2
+    Flujo->>Cliente: Mensaje N
+    Flujo->>ClienteN: Mensaje N
     
 ```
 
@@ -183,7 +183,7 @@ Se trata de un servidor chat que expone el puerto 50003 para aceptar conexiones 
 ```
 >4. En la clase Flujo tenemos el motodo `void Run` herencia de la clase `Thread` para la ejecion por hilos.
 
-- Los clientes intercambian mensajes de manera grupal gracias al metodo `broadcast`
+> - Los clientes distribuyen mensajes de manera grupal gracias al metodo `broadcast`
 
 
 #### Clase Flujo.
